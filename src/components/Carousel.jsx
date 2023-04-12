@@ -33,18 +33,24 @@ const goToPrevSlide = () => {
 };
 
   return (
-    <div>
-      <button onClick={goToPrevSlide}>Prev</button>
-      <div>
-        {slides.slice(currentSlide, currentSlide + 2).map((slide, index) => (
-          <div key={index}>
-            <img src={slide.image} alt={slide.title} />
-            <h3>{slide.title}</h3>
-            <p>{slide.description}</p>
-          </div>
-        ))}
+    <div style={{ width: "800px", margin: "0 auto" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <button onClick={goToPrevSlide}>Prev</button>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          {slides.slice(currentSlide, currentSlide + 3).map((slide, index) => (
+            <div key={index}>
+              <img
+                src={slide.image}
+                alt={slide.title}
+                style={{ marginRight: "10px" }}
+              />
+              <h3>{slide.title}</h3>
+              <p>{slide.description}</p>
+            </div>
+          ))}
+        </div>
+        <button onClick={goToNextSlide}>Next</button>
       </div>
-      <button onClick={goToNextSlide}>Next</button>
     </div>
   );
 };

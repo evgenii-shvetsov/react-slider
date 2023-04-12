@@ -8,7 +8,7 @@ class DoublyLinkedList {
   }
 
   append(data) {
-    const newNode = new DoublyLinkedListNode(data); // Fixed: used DoublyLinkedListNode instead of Node
+    const newNode = new DoublyLinkedListNode(data);
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
