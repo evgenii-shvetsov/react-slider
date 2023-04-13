@@ -4,13 +4,13 @@ import "./Carousel.css";
 
 const Carousel = ({ slides }) => {
   const [currentNode, setCurrentNode] = useState(null);
+  const doublyLinkedList = useRef(new DoublyLinkedList());
 
   useEffect(() => {
-    const doublyLinkedList = new DoublyLinkedList();
     slides.forEach((slide) => {
-      doublyLinkedList.appendNode(slide);
+      doublyLinkedList.current.appendNode(slide);
     });
-    setCurrentNode(doublyLinkedList.head);
+    setCurrentNode(doublyLinkedList.current.head);
   }, [slides]);
 
   console.log(currentNode);
@@ -19,7 +19,7 @@ const Carousel = ({ slides }) => {
     if (currentNode && currentNode.next) {
       setCurrentNode(currentNode.next);
     } else {
-      setCurrentNode(null);
+      setCurrentNode(doublyLinkedList.current.head);
     }
   };
 
@@ -27,7 +27,11 @@ const Carousel = ({ slides }) => {
     if (currentNode && currentNode.prev) {
       setCurrentNode(currentNode.prev);
     } else {
-      setCurrentNode(null);
+      let lastNode = doublyLinkedList.current.head;
+      while (lastNode && lastNode.next) {
+        lastNode = lastNode.next;
+      }
+      setCurrentNode(lastNode);
     }
   };
 
@@ -43,24 +47,31 @@ const Carousel = ({ slides }) => {
         <button onClick={goToPrevSlide} className="prev-button">
           Prev
         </button>
-        {currentNode && (
-          <>
-            <div className="carousel-item">
-              <img src={currentNode.data.image} alt={currentNode.data.title} />
-              <h3>{currentNode.data.title}</h3>
-              <p>{currentNode.data.description}</p>
-            </div>
+        {currentNode &&
+          currentNode.data && ( 
+            <>
+              <div className="carousel-item">
+                <img
+                  src={currentNode.data.image}
+                  alt={currentNode.data.title}
+                />
+                <h3>{currentNode.data.title}</h3>
+                <p>{currentNode.data.description}</p>
+              </div>
 
-            <div className="carousel-item">
-              <img
-                src={currentNode.next.data.image}
-                alt={currentNode.next.data.title}
-              />
-              <h3>{currentNode.next.data.title}</h3>
-              <p>{currentNode.next.data.description}</p>
-            </div>
-          </>
-        )}
+              {currentNode.next &&
+                currentNode.next.data && ( 
+                  <div className="carousel-item">
+                    <img
+                      src={currentNode.next.data.image}
+                      alt={currentNode.next.data.title}
+                    />
+                    <h3>{currentNode.next.data.title}</h3>
+                    <p>{currentNode.next.data.description}</p>
+                  </div>
+                )}
+            </>
+          )}
         <button onClick={goToNextSlide} className="next-button">
           Next
         </button>
