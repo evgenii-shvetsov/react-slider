@@ -1,11 +1,16 @@
-.slide{
-     transition: transform 0.3s ease-in-out;
+.slideContainer {
+  display: flex;
+  justify-content: center;
 }
 
-/* .prev-button{
-transition: transform 0.3s ease-in-out;
+.slideContainer.slide-transition {
+  transition: transform 0.3s ease;
 }
 
-.next-button{
-transition: transform 0.3s ease-in-out;
-} */
+.slide {
+  flex: 0 0 calc(100% / 3);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+

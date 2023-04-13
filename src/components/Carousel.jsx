@@ -1,13 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DoublyLinkedList from "./DoublyLinkedList";
 import "./Carousel.css";
 
 const Carousel = ({ slides }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [list, setList] = useState(new DoublyLinkedList());
+  const [list, setList] = useState(null);
+//   const slideContainerRef = useRef(null);
 
-
-  useState(() => {
+  useEffect(() => {
     const newList = new DoublyLinkedList();
     slides.forEach((slide) => {
       newList.append(slide);
@@ -21,6 +21,9 @@ const Carousel = ({ slides }) => {
       if (list && list.next) {
         setList(list.next());
       }
+    } else {
+      setCurrentSlide(0); // Reset to first slide when reaching the end
+      setList(list && list.head); // Reset list to head when reaching the end
     }
   };
 
@@ -30,18 +33,26 @@ const Carousel = ({ slides }) => {
       if (list && list.prev) {
         setList(list.prev());
       }
+    } else {
+      setCurrentSlide(slides.length - 1); // Reset to last slide when reaching the beginning
+      setList(list && list.tail); // Reset list to tail when reaching the beginning
     }
   };
 
 
-
   return (
     <div style={{ width: "800px", margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <button onClick={goToPrevSlide} className="prev-button">
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems:"center" }}>
+        <button
+          onClick={goToPrevSlide}
+          className="prev-button"
+          
+        >
           Prev
         </button>
         <div
+          //   ref={slideContainerRef}
+          className="slideContainer"
           style={{
             display: "flex",
             justifyContent: "center",
@@ -59,7 +70,11 @@ const Carousel = ({ slides }) => {
             </div>
           ))}
         </div>
-        <button onClick={goToNextSlide} className="next-button">
+        <button
+          onClick={goToNextSlide}
+          className="next-button"
+     
+        >
           Next
         </button>
       </div>
@@ -68,3 +83,5 @@ const Carousel = ({ slides }) => {
 };
 
 export default Carousel;
+
+
