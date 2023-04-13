@@ -1,16 +1,28 @@
 .slideContainer {
   display: flex;
   justify-content: center;
+  transition: transform 0.3s ease-in-out;
+    /* box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); Example using box-shadow */
+  /* border: 1px solid rgba(0, 0, 0, 0.3); */ /* Example using border */
 }
 
-.slideContainer.slide-transition {
+/* .slideContainer.slide-transition {
   transition: transform 0.3s ease;
-}
+} */
 
 .slide {
-  flex: 0 0 calc(100% / 3);
+  /* flex: 0 0 calc(100% / 3);
   padding: 10px;
+  box-sizing: border-box; */
+  /* flex: 0 0 100%; */
+  padding: 10px;
+  /* transition: transform 0.3s ease-in-out; */
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
+  
 }
 
-
+.prev-button,
+.next-button {
+ z-index: 1;
+}

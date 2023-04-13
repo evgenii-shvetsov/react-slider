@@ -3,78 +3,65 @@ import DoublyLinkedList from "./DoublyLinkedList";
 import "./Carousel.css";
 
 const Carousel = ({ slides }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [list, setList] = useState(null);
-//   const slideContainerRef = useRef(null);
+  const [currentNode, setCurrentNode] = useState(null);
 
   useEffect(() => {
-    const newList = new DoublyLinkedList();
+    const doublyLinkedList = new DoublyLinkedList();
     slides.forEach((slide) => {
-      newList.append(slide);
+      doublyLinkedList.appendNode(slide);
     });
-    setList(newList);
+    setCurrentNode(doublyLinkedList.head);
   }, [slides]);
 
+  console.log(currentNode);
+
   const goToNextSlide = () => {
-    if (currentSlide < slides.length - 1) {
-      setCurrentSlide(currentSlide + 1);
-      if (list && list.next) {
-        setList(list.next());
-      }
+    if (currentNode && currentNode.next) {
+      setCurrentNode(currentNode.next);
     } else {
-      setCurrentSlide(0); // Reset to first slide when reaching the end
-      setList(list && list.head); // Reset list to head when reaching the end
+      setCurrentNode(null);
     }
   };
 
   const goToPrevSlide = () => {
-    if (currentSlide > 0) {
-      setCurrentSlide(currentSlide - 1);
-      if (list && list.prev) {
-        setList(list.prev());
-      }
+    if (currentNode && currentNode.prev) {
+      setCurrentNode(currentNode.prev);
     } else {
-      setCurrentSlide(slides.length - 1); // Reset to last slide when reaching the beginning
-      setList(list && list.tail); // Reset list to tail when reaching the beginning
+      setCurrentNode(null);
     }
   };
 
-
   return (
     <div style={{ width: "800px", margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems:"center" }}>
-        <button
-          onClick={goToPrevSlide}
-          className="prev-button"
-          
-        >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <button onClick={goToPrevSlide} className="prev-button">
           Prev
         </button>
-        <div
-          //   ref={slideContainerRef}
-          className="slideContainer"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          {slides.slice(currentSlide, currentSlide + 3).map((slide, index) => (
-            <div key={index} className="slide">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                style={{ marginRight: "10px" }}
-              />
-              <h3>{slide.title}</h3>
-              <p>{slide.description}</p>
+        {currentNode && (
+          <>
+            <div className="carousel-item">
+              <img src={currentNode.data.image} alt={currentNode.data.title} />
+              <h3>{currentNode.data.title}</h3>
+              <p>{currentNode.data.description}</p>
             </div>
-          ))}
-        </div>
-        <button
-          onClick={goToNextSlide}
-          className="next-button"
-     
-        >
+
+            <div className="carousel-item">
+              <img
+                src={currentNode.next.data.image}
+                alt={currentNode.next.data.title}
+              />
+              <h3>{currentNode.next.data.title}</h3>
+              <p>{currentNode.next.data.description}</p>
+            </div>
+          </>
+        )}
+        <button onClick={goToNextSlide} className="next-button">
           Next
         </button>
       </div>
@@ -83,5 +70,3 @@ const Carousel = ({ slides }) => {
 };
 
 export default Carousel;
-
-
