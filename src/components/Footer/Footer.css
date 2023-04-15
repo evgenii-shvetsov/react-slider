@@ -4,6 +4,10 @@ footer {
   height: 200px;
 }
 
+.footer-text h3{
+  font-weight: 400;
+}
+
 .footer-text a {
     margin-top: -10px;
     display: block;

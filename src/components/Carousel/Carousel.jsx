@@ -94,7 +94,7 @@ const Carousel = ({ slides }) => {
     ) {
       return { transform: "translateX(100%)", zIndex: 1 };
     } else {
-      return { transform: "translateY(150%)" }; // Move the other slides off-screen
+      return { transform: "translateY(150%)" };
     }
   };
 
@@ -118,7 +118,6 @@ const Carousel = ({ slides }) => {
               alt={currentNodeToRender.data.title}
             />
             <h3>{currentNodeToRender.data.title}</h3>
-            <p>{currentNodeToRender.data.description}</p>
           </div>
         );
         currentNodeToRender = currentNodeToRender.next;
@@ -131,7 +130,7 @@ const Carousel = ({ slides }) => {
 
   return (
     <div className="carousel-wrapper">
-      {isLoading ? ( // Conditionally render the spinner based on the loading status
+      {isLoading ? (
         <div className="spinner">Loading...</div>
       ) : (
         <>

@@ -8,7 +8,7 @@ const Footer = () => {
     <footer>
       <section className="footer-info">
         <div className="footer-text">
-          <h3>Evgenii Shvetsov</h3>
+          {/* <h3>Evgenii Shvetsov</h3> */}
           {/* <a
             href="https://shvetsov.dev"
             target="_blank"
