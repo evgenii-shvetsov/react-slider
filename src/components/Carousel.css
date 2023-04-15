@@ -33,6 +33,7 @@
   left: 0;
   right: 0;
   margin: auto;
+
  
 }
 
@@ -111,3 +112,9 @@ button:focus-visible {
   background: #242424;
   inset: 5px;
 } */
+
+@media (max-width: 900px){
+  .carousel-wrapper{
+    display: none;
+  }
+}
