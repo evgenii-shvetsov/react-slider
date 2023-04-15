@@ -8,19 +8,24 @@ const Carousel = ({ slides }) => {
   const [isLoading, setIsLoading] = useState(true);
   const doublyLinkedList = useRef(new DoublyLinkedList());
 
-  //   useEffect(() => {
-  //     slides.forEach((slide) => {
-  //       doublyLinkedList.current.appendNode(slide);
-  //     });
+  const loadImage = (src) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+    });
+  };
 
-  //     if (doublyLinkedList.current.head) {
-  //       doublyLinkedList.current.head.prev =
-  //         doublyLinkedList.current.head.prev || doublyLinkedList.current.tail;
-  //       doublyLinkedList.current.tail.next =
-  //         doublyLinkedList.current.tail.next || doublyLinkedList.current.head;
-  //         setCurrentNode(doublyLinkedList.current.head.next);
-  //     }
-  //   }, [slides]);
+  const loadAllImages = async () => {
+    try {
+      await Promise.all(slides.map((slide) => loadImage(slide.image)));
+      setIsLoading(false);
+      setCurrentNode(doublyLinkedList.current.head.next);
+    } catch (error) {
+      console.error("Error loading images:", error);
+    }
+  };
 
   useEffect(() => {
     slides.forEach((slide) => {
@@ -34,48 +39,21 @@ const Carousel = ({ slides }) => {
         doublyLinkedList.current.tail.next || doublyLinkedList.current.head;
     }
 
-    const loadImage = (src) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-      });
-    };
-
-    const loadAllImages = async () => {
-      try {
-        await Promise.all(slides.map((slide) => loadImage(slide.image)));
-        setIsLoading(false);
-        setCurrentNode(doublyLinkedList.current.head.next);
-      } catch (error) {
-        console.error("Error loading images:", error);
-      }
-    };
-
     loadAllImages();
   }, [slides]);
 
-  const goToNextSlide = async () => {
-    if (isNavigating) return;
-    setIsNavigating(true);
-    if (currentNode && currentNode.next) {
-      setCurrentNode(currentNode.next);
-    } else {
-      setCurrentNode(doublyLinkedList.current.head);
-    }
-    setIsNavigating(false);
-  };
-
-  const goToPrevSlide = () => {
+  const navigate = (direction) => {
     if (isNavigating) return;
     setIsNavigating(true);
 
-    if (currentNode && currentNode.prev) {
-      setCurrentNode(currentNode.prev);
-    } else {
-      setCurrentNode(doublyLinkedList.current.tail);
-    }
+    setCurrentNode((current) => {
+      if (!current) return null;
+      if (direction === "next") {
+        return current.next || doublyLinkedList.current.head;
+      } else if (direction === "prev") {
+        return current.prev || doublyLinkedList.current.tail;
+      }
+    });
 
     setIsNavigating(false);
   };
@@ -135,7 +113,7 @@ const Carousel = ({ slides }) => {
       ) : (
         <>
           <button
-            onClick={goToPrevSlide}
+            onClick={() => navigate("prev")}
             className="prev-button"
             disabled={isNavigating}
           >
@@ -145,7 +123,7 @@ const Carousel = ({ slides }) => {
           <div className="carousel-container">{renderSlides()}</div>
 
           <button
-            onClick={goToNextSlide}
+            onClick={() => navigate("next")}
             className="next-button"
             disabled={isNavigating}
           >
