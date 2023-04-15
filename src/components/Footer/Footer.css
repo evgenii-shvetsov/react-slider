@@ -1,0 +1,29 @@
+footer {
+  margin: 50px auto;
+  width: 300px;
+  height: 200px;
+}
+
+.footer-text a {
+    margin-top: -10px;
+    display: block;
+}
+
+.social_media {
+  margin-top: 10px;
+}
+.social_media a {
+  margin: 10px;
+}
+
+.social_media img {
+  width: 40px;
+  /* background-color: rgb(237, 243, 224); */
+  
+  border-radius: 10px;
+  box-shadow: 0 0 10px -4px #f8f8f8;
+}
+
+.social_media img:hover {
+  transform: scale(1.2);
+}

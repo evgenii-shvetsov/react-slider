@@ -5,7 +5,22 @@ import "./Carousel.css";
 const Carousel = ({ slides }) => {
   const [isNavigating, setIsNavigating] = useState(false);
   const [currentNode, setCurrentNode] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const doublyLinkedList = useRef(new DoublyLinkedList());
+
+  //   useEffect(() => {
+  //     slides.forEach((slide) => {
+  //       doublyLinkedList.current.appendNode(slide);
+  //     });
+
+  //     if (doublyLinkedList.current.head) {
+  //       doublyLinkedList.current.head.prev =
+  //         doublyLinkedList.current.head.prev || doublyLinkedList.current.tail;
+  //       doublyLinkedList.current.tail.next =
+  //         doublyLinkedList.current.tail.next || doublyLinkedList.current.head;
+  //         setCurrentNode(doublyLinkedList.current.head.next);
+  //     }
+  //   }, [slides]);
 
   useEffect(() => {
     slides.forEach((slide) => {
@@ -17,8 +32,28 @@ const Carousel = ({ slides }) => {
         doublyLinkedList.current.head.prev || doublyLinkedList.current.tail;
       doublyLinkedList.current.tail.next =
         doublyLinkedList.current.tail.next || doublyLinkedList.current.head;
-      setCurrentNode(doublyLinkedList.current.head.next);
     }
+
+    const loadImage = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+      });
+    };
+
+    const loadAllImages = async () => {
+      try {
+        await Promise.all(slides.map((slide) => loadImage(slide.image)));
+        setIsLoading(false);
+        setCurrentNode(doublyLinkedList.current.head.next);
+      } catch (error) {
+        console.error("Error loading images:", error);
+      }
+    };
+
+    loadAllImages();
   }, [slides]);
 
   const goToNextSlide = async () => {
@@ -59,7 +94,7 @@ const Carousel = ({ slides }) => {
     ) {
       return { transform: "translateX(100%)", zIndex: 1 };
     } else {
-      return { transform: "translateX(-300%)" }; // Move the other slides off-screen
+      return { transform: "translateY(150%)" }; // Move the other slides off-screen
     }
   };
 
@@ -96,23 +131,29 @@ const Carousel = ({ slides }) => {
 
   return (
     <div className="carousel-wrapper">
-      <button
-        onClick={goToPrevSlide}
-        className="prev-button"
-        disabled={isNavigating}
-      >
-        Prev
-      </button>
+      {isLoading ? ( // Conditionally render the spinner based on the loading status
+        <div className="spinner">Loading...</div>
+      ) : (
+        <>
+          <button
+            onClick={goToPrevSlide}
+            className="prev-button"
+            disabled={isNavigating}
+          >
+            Prev
+          </button>
 
-      <div className="carousel-container">{renderSlides()}</div>
+          <div className="carousel-container">{renderSlides()}</div>
 
-      <button
-        onClick={goToNextSlide}
-        className="next-button"
-        disabled={isNavigating}
-      >
-        Next
-      </button>
+          <button
+            onClick={goToNextSlide}
+            className="next-button"
+            disabled={isNavigating}
+          >
+            Next
+          </button>
+        </>
+      )}
     </div>
   );
 };

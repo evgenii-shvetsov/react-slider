@@ -16,8 +16,8 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #dde9ef;
+  text-decoration-line: none;
 }
 a:hover {
   color: #535bf2;
@@ -31,9 +31,12 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.App{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  /* align-items: space-around; */
+  flex-grow: 1;
 }
 
 @media (prefers-color-scheme: light) {
