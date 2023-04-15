@@ -140,7 +140,7 @@ const Carousel = ({ slides }) => {
             className="prev-button"
             disabled={isNavigating}
           >
-            Prev
+            ←
           </button>
 
           <div className="carousel-container">{renderSlides()}</div>
@@ -150,7 +150,7 @@ const Carousel = ({ slides }) => {
             className="next-button"
             disabled={isNavigating}
           >
-            Next
+            →
           </button>
         </>
       )}
