@@ -20,6 +20,8 @@
   position: relative;
 }
 
+
+
 .carousel-item {
   transition: transform 1.5s ease-in-out; /*cubic-bezier(0.58, 0.12, 0.7, 1.1);*/
   /*
@@ -66,11 +68,46 @@ button {
   height: 60px;
   margin-left: 10px;
   margin-right: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
 }
 button:hover {
-  border-color: #48abe0;
+  border-color: #ababac;
 }
-button:focus,
+button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+  background-color: #000000;
+}
+/* button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+} */
+
+
+
+/* .carousel-wrapper::before{
+  content: '';
+  position: absolute;
+  width:425px;
+  background-image: linear-gradient(180deg, rgb(0,183,255),rgb(255,48,255));
+  height: 80%;
+  animation: rotationImg 3s linear infinite;
+  transition: all .2s linear;
+
 }
+
+@keyframes rotationImg {
+  from {
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+.carousel-wrapper::after{
+  content: "";
+  position: absolute;
+  background: #242424;
+  inset: 5px;
+} */
