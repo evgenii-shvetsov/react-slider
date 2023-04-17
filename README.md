@@ -4,7 +4,7 @@
 
 **Carousel built with React 18 and Doubly Linked List Data Structure** <br /> 
 
-[React-slider](https://home-hi1b.onrender.com/)
+[React-slider](https://react-slider-dll.netlify.app/)
 
 🚀 Benefits:
 
