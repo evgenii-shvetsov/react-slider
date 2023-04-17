@@ -6,7 +6,6 @@
 
 [React-slider](https://home-hi1b.onrender.com/)
 
-<br />
 🚀 Benefits:
 
 1. Circular navigation is more natural and straightforward, as tail and head elements have direct references to each other.
