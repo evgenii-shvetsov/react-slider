@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Carousel built with React 18 and Doubly Linked List Data Structure** <br /> <br />
+**Carousel built with React 18 and Doubly Linked List Data Structure** <br /> 
 
 [React-slider](https://home-hi1b.onrender.com/)
 
@@ -20,7 +20,7 @@
 
 #### Doubly Linked List Data Structure
 ```javascript
-    // Node class
+
 class Node {
   constructor(data) {
     this.data = data;
@@ -29,7 +29,7 @@ class Node {
   }
 }
 
-// Doubly linked list class
+
 class DoublyLinkedList {
   constructor() {
     this.head = null;
