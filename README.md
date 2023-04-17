@@ -1,12 +1,12 @@
-[React-slider](https://home-hi1b.onrender.com/)
-
-<br />
-
 ![react-slider-ddl](https://user-images.githubusercontent.com/46214277/232566216-834a3ae7-ffc4-44f5-9401-7d7936f1fb53.gif)
 
 ## Overview
 
-**Carousel built with React 18 and Doubly Linked List Data Structure** <br />
+**Carousel built with React 18 and Doubly Linked List Data Structure** <br /> <br />
+
+[React-slider](https://home-hi1b.onrender.com/)
+
+<br />
 🚀 Benefits:
 
 1. Circular navigation is more natural and straightforward, as tail and head elements have direct references to each other.
