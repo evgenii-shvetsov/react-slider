@@ -14,7 +14,6 @@ class DoublyLinkedList {
     this.tail = null;
   }
 
-  //append node to the end of the list
   appendNode(data) {
     const newNode = new Node(data);
     if (!this.head) {
@@ -26,7 +25,6 @@ class DoublyLinkedList {
       this.tail = newNode;
     }
   }
-
 }
 
 export default DoublyLinkedList;

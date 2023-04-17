@@ -1,4 +1,3 @@
-//image: "https://picsum.photos/200",
 const slides = [
   {
     id: 1,
@@ -34,7 +33,7 @@ const slides = [
     id: 6,
     image: "https://picsum.photos/id/88/200",
     title: "Slide 6",
-    description: "This is the sixt slide",
+    description: "This is the sixth slide",
   },
   {
     id: 7,
@@ -63,3 +62,6 @@ const slides = [
 ];
 
 export default slides
+
+
+//https://picsum.photos/200"
