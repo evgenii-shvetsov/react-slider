@@ -1,4 +1,4 @@
-[Home](https://home-hi1b.onrender.com/)
+[React-slider](https://home-hi1b.onrender.com/)
 
 <br />
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-**Carousel built with React 18 and Doubly Linked List Data Structure**
+**Carousel built with React 18 and Doubly Linked List Data Structure** <br />
 🚀 Benefits:
 
 1. Circular navigation is more natural and straightforward, as tail and head elements have direct references to each other.
@@ -16,13 +16,6 @@
 
 1. Increased complexity due to the custom data structure, making the code less familiar to other developers.
 2. Higher memory overhead from storing references to next and previous elements for each node.
-
-## Technologies
-
-**Frontend:** React 18 <br/>
-
-
-
 
 
 #### Doubly Linked List Data Structure
